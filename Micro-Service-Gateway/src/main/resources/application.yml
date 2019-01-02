@@ -1,7 +1,7 @@
 #zuul网关
 spring:
   application:
-    name: mss-gateway
+    name: ljx-gateway
 server:
   port: 9030
 eureka:
@@ -13,12 +13,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://ljx-eureka1:9010/eureka/,http://ljx-eureka2:9011/eureka/
+    eureka-server-read-timeout-seconds:
 zuul:
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
+    connection-request-timeout-millis: 6000
   routes:
     uaa:
+#      表明鉴权认证经过zuul
       path: /uaa/**
       strip-prefix: true
       sensitiveHeaders:
@@ -26,24 +29,11 @@ zuul:
 security:
   oauth2:
     resource:
-      user-info-uri:  http://localhost:9060/user
+      user-info-uri:  http://192.168.24.188:9060/user
       prefer-token-info: false
 ##############end#####################
 ####超时配置####
 ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
-  MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 2
   eureka:
     enabled: true
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true
-        isolation:
-          thread:
-            timeoutInMilliseconds: 600000
 ###超时配置###

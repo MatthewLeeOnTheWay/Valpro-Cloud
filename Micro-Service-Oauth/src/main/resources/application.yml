@@ -7,13 +7,11 @@ spring:
   jpa:
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/zuul-auth?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.24.188:3306/valpro_cloud?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
-    druid:
-      driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: 127.0.0.1
+    host: 192.168.24.188
     port: 6379
     password: 123456
 eureka:
@@ -26,13 +24,12 @@ eureka:
     lease-expiration-duration-in-seconds: 10
   client:
     service-url:
-      defaultZone: http://mss-eureka1:9010/eureka/
+      defaultZone: http://ljx-eureka1:9010/eureka/
 logging:
-  config: classpath:logback.xml
+  file: ../logs/lemoon.log
   level:
     org:
-      springframework:
-        web: info
+      springframework: debug
 ###feign Ä¬ÈÏ¹Ø±ÕÈÛ¶Ï£¬Çë¿´HystrixFeignConfiguration
 feign:
   hystrix:

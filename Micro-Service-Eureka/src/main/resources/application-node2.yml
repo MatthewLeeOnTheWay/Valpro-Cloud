@@ -1,8 +1,5 @@
 server:
   port: 9011
-spring:
-  application:
-    name: ljx-eureka
 eureka:
   instance:
     hostname: ljx-eureka2
