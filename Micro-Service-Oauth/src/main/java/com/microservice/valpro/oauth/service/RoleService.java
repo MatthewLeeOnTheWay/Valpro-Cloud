@@ -14,6 +14,6 @@ import java.util.List;
  **/
 /*@FeignClient(name = "",fallback = RoleServiceImpl.class)*/
 public interface RoleService {
-    @GetMapping("role/getRoleByUserId/{userId}")
+//    @GetMapping("role/getRoleByUserId/{userId}")
     Result<List<SysRole>> getRoleByUserId(@PathVariable("userId") Integer userId);
 }

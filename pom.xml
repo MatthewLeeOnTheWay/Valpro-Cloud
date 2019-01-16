@@ -26,6 +26,7 @@
         ，需要解决https://github.com/spring-projects/spring-security-oauth2-boot/issues/27，
         SpringBoot2.1.X已经解决，真是坑啊，所以说不要盲目的升级！！！-->
         <spring-security-oauth.version>2.3.3.RELEASE</spring-security-oauth.version>
+        <thymeleaf-extras-springsecurity.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity.version>
     </properties>
     <dependencies>
         <dependency>
@@ -41,7 +42,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -106,10 +107,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <dependency>    <!-- http client version is 4.5.3 -->
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
         <!--单点登陆-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter -->
         <dependency>
@@ -156,5 +153,11 @@
     <modules>
         <module>Micro-Service-Eureka</module>
         <module>Micro-Service-Gateway</module>
+        <module>Micro-Service-Common</module>
+        <module>Micro-Service-Config</module>
+        <module>Micro-Service-Monitor</module>
+        <module>Micro-Service-Oauth</module>
+        <module>Micro-Service-Resource01</module>
+        <module>Micro-Service-Resource02</module>
     </modules>
 </project>

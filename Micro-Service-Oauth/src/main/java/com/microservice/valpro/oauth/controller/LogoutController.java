@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description: logout control
+ * @description: logout controller
  * @author: Mr.Lee
  * @create: 2019-01-02 01:44
  **/

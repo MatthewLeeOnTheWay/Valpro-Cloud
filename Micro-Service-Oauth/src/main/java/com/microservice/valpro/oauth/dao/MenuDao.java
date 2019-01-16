@@ -1,7 +1,6 @@
 package com.microservice.valpro.oauth.dao;
 
 import com.microservice.valpro.oauth.entity.SysMenu;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

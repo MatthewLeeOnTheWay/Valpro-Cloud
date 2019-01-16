@@ -11,7 +11,7 @@
         <dependency>
             <groupId>com.microservice.valpro</groupId>
             <artifactId>micro-service-valpro-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -45,7 +45,7 @@
     </parent>
     <groupId>com.microservice.valpro</groupId>
     <artifactId>micro-service-valpro-oauth</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>micro-service-oauth</name>
     <description>Demo project for Spring Boot</description>
 

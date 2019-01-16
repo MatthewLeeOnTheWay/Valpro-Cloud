@@ -14,7 +14,7 @@ import java.util.List;
  * @author: Mr.Lee
  * @create: 2019-01-02 04:41
  **/
-@Service
+@Service("permissionService")
 public class PermissonServiceImpl implements PermissionService {
     @Autowired
     private MenuDao menuDao;

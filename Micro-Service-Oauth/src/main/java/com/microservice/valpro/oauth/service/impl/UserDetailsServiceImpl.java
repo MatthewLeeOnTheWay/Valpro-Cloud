@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -33,10 +34,13 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger logger=LoggerFactory.getLogger(UserDetailsServiceImpl.class);
     @Autowired
+    @Qualifier("userService")
     private UserService userService;
     @Autowired
+    @Qualifier("roleService")
     private RoleService roleService;
     @Autowired
+    @Qualifier("permissionService")
     private PermissionService permissionService;
 
     private ObjectMapper objectMapper = new ObjectMapper();

@@ -3,14 +3,12 @@ package com.microservice.vapro.gateway.service;
 import com.microservice.valpro.common.service.PermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.reactive.function.server.ServerRequest;
-
-import java.net.MalformedURLException;
 import java.util.List;
 
 /**
@@ -35,12 +33,13 @@ public class PermissionServiceImpl implements PermissionService {
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
-    public boolean hasPermission(ServerRequest request, Authentication authentication) {
+    public boolean hasPermission(HttpRequest request, Authentication authentication) {
         Object principal = authentication.getPrincipal();
         String requestUrl = null;
         try {
-            requestUrl = request.uri().toURL().toString();
-        } catch (MalformedURLException e) {
+//            requestUrl = request.uri().toURL().toString();
+            requestUrl=request.getURI().toString();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("requestUrl:{}",requestUrl);

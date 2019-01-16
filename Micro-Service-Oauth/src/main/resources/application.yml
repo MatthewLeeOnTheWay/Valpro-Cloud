@@ -1,19 +1,16 @@
 server:
   port: 9060
-
 spring:
   application:
     name: authCenter
   jpa:
     show-sql: true
-  datasource:
-    url: jdbc:mysql://192.168.24.188:3306/valpro_cloud?useUnicode=true&characterEncoding=utf-8
-    username: root
-    password: 123456
   redis:
     host: 192.168.24.188
     port: 6379
     password: 123456
+  profiles:
+    active: dev
 eureka:
   instance:
     prefer-ip-address: true

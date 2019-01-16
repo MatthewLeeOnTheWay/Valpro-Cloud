@@ -21,15 +21,18 @@ zuul:
     connection-request-timeout-millis: 6000
   routes:
     uaa:
-#      表明鉴权认证经过zuul
+#表明鉴权认证经过zuul
       path: /uaa/**
       strip-prefix: true
       sensitiveHeaders:
       serviceId: authcenter
 security:
   oauth2:
+    client:
+      access-token-uri: http://192.168.24.188:9030/uaa/oauth/token ##网关的地址
+      user-authorization-uri: http://192.168.24.188:9030/uaa/oauth/authorize
     resource:
-      user-info-uri:  http://192.168.24.188:9060/user
+      user-info-uri:  http://192.168.24.188:9030/uaa/user
       prefer-token-info: false
 ##############end#####################
 ####超时配置####

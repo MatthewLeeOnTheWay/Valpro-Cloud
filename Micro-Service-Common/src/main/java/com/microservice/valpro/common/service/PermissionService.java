@@ -1,7 +1,7 @@
 package com.microservice.valpro.common.service;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.reactive.function.server.ServerRequest;
 
 /**
  * @description:
@@ -9,5 +9,5 @@ import org.springframework.web.reactive.function.server.ServerRequest;
  * @create: 2019-01-02 01:12
  **/
 public interface PermissionService {
-    boolean hasPermission(ServerRequest request, Authentication authentication);
+    boolean hasPermission(HttpRequest request, Authentication authentication);
 }

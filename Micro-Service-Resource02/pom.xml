@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.microservice.valpro</groupId>
     <artifactId>micro-service-resource02</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>micro-service-resource02</name>
     <description>Demo project for Spring Boot</description>
 
