@@ -8,7 +8,7 @@ spring:
     time-zone: GMT+8
 #  切换profile，切换环境
   profiles:
-    active: node1
+    active: node2
 eureka:
   instance:
     hostname: ljx-eureka

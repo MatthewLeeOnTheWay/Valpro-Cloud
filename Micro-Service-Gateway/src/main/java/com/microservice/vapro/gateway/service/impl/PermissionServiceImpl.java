@@ -1,14 +1,14 @@
-package com.microservice.vapro.gateway.service;
+package com.microservice.vapro.gateway.service.impl;
 
-import com.microservice.valpro.common.service.PermissionService;
+import com.microservice.vapro.gateway.service.PermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -33,12 +33,12 @@ public class PermissionServiceImpl implements PermissionService {
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
-    public boolean hasPermission(HttpRequest request, Authentication authentication) {
+    public boolean hasPermission(HttpServletRequest request, Authentication authentication) {
         Object principal = authentication.getPrincipal();
         String requestUrl = null;
         try {
 //            requestUrl = request.uri().toURL().toString();
-            requestUrl=request.getURI().toString();
+            requestUrl=request.getRequestURI();
         } catch (Exception e) {
             e.printStackTrace();
         }
