@@ -2,5 +2,5 @@ security:
   oauth2:
     resource:
       id: resource
-      user-info-uri: http://192.168.24.188:9030/uaa/user
+      user-info-uri: http://localhost:9030/uaa/user
       prefer-token-info: false

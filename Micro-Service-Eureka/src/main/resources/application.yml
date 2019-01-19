@@ -1,3 +1,5 @@
+server:
+  port: 9010
 spring:
   application:
     name: ljx-eureka
@@ -8,7 +10,7 @@ spring:
     time-zone: GMT+8
 #  切换profile，切换环境
   profiles:
-    active: node2
+    active: node1
 eureka:
   instance:
     hostname: ljx-eureka
@@ -20,3 +22,4 @@ eureka:
   server:
   #### 清理间隔（单位毫秒，默认是60*1000），开发环境设置如下可快速移除不可用的服务
     enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
