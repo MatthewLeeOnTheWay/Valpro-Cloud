@@ -1,7 +1,8 @@
 package com.microservice.valpro.oauth.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microservice.valpro.common.entity.*;
+import com.microservice.valpro.common.constant.SecurityConstants;
+import com.microservice.valpro.common.dto.*;
 import com.microservice.valpro.oauth.entity.SysMenu;
 import com.microservice.valpro.oauth.entity.SysRole;
 import com.microservice.valpro.oauth.entity.SysUser;
@@ -10,9 +11,9 @@ import com.microservice.valpro.oauth.service.RoleService;
 import com.microservice.valpro.oauth.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -47,9 +48,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Override
+    @Cacheable(value = SecurityConstants.CLIENT_DETAILS_KEY, key = "#username", unless = "#result == null")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Result<SysUser> userResult = userService.findByUsername(username);
-        if (userResult==null) {
+        if (userResult.getData()==null) {
             throw new UsernameNotFoundException("用户:" + username + ",不存在!");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
@@ -58,7 +60,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean credentialsNonExpired = true; // 有效性 :true:凭证有效 false:凭证无效
         boolean accountNonLocked = true; // 锁定性 :true:未锁定 false:已锁定
 
-        Result<List<SysRole>> roleResult = roleService.getRoleByUserId(userResult.getData().getId());
+        int id=userResult.getData().getId();
+        Result<List<SysRole>> roleResult = roleService.getRoleByUserId(id);
         if (roleResult!=null){
             List<SysRole> roleList = roleResult.getData();
             for (SysRole role:roleList){
@@ -67,10 +70,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 grantedAuthorities.add(grantedAuthority);
                 //获取权限
                 Result<List<SysMenu>> perResult  = permissionService.getPermissionsByRoleId(role.getId());
-                if (perResult!=null){
+                if (perResult.getData()!=null){
                     List<SysMenu> permissionList = perResult.getData();
-                    for (SysMenu menu:permissionList
-                    ) {
+                    for (SysMenu menu:permissionList) {
                         GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
                         grantedAuthorities.add(authority);
                     }

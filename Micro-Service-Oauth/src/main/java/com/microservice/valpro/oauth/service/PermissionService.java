@@ -1,9 +1,6 @@
 package com.microservice.valpro.oauth.service;
 
-import com.microservice.valpro.common.entity.Result;
-import com.microservice.valpro.oauth.entity.SysMenu;
-
-import java.util.List;
+import com.microservice.valpro.common.dto.Result;
 
 /**
  * @description:

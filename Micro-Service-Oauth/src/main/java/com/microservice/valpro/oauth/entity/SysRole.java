@@ -1,15 +1,14 @@
 package com.microservice.valpro.oauth.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "sys_role")
+@Entity(name = "sys_role")
 public class SysRole {
     @Id
-    @GeneratedValue(generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
@@ -18,10 +17,10 @@ public class SysRole {
 
     private String tips;
 
-    @Column(name = "create_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
-    @Column(name = "update_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
 
     private Integer status;

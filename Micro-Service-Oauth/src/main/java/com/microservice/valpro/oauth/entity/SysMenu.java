@@ -5,13 +5,15 @@ package com.microservice.valpro.oauth.entity;
  * @author: Mr.Lee
  * @create: 2019-01-02 04:34
  **/
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "sys_menu")
+@Entity(name = "sys_menu")
 public class SysMenu {
     @Id
-    @GeneratedValue(generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     /**
@@ -61,10 +63,10 @@ public class SysMenu {
 
     private String icon;
 
-    @Column(name = "create_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
-    @Column(name = "update_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
 
     /**

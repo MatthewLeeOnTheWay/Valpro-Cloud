@@ -1,8 +1,7 @@
 package com.microservice.valpro.oauth.service;
 
-import com.microservice.valpro.common.entity.Result;
+import com.microservice.valpro.common.dto.Result;
 import com.microservice.valpro.oauth.entity.SysRole;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;

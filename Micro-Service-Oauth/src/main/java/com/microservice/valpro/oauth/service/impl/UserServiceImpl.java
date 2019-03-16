@@ -1,11 +1,12 @@
 package com.microservice.valpro.oauth.service.impl;
 
-import com.microservice.valpro.common.entity.Result;
+import com.microservice.valpro.common.dto.Result;
 import com.microservice.valpro.oauth.dao.UserDao;
 import com.microservice.valpro.oauth.entity.SysUser;
 import com.microservice.valpro.oauth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  * @description:

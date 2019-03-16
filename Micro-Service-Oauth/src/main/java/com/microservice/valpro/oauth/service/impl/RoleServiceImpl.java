@@ -1,6 +1,6 @@
 package com.microservice.valpro.oauth.service.impl;
 
-import com.microservice.valpro.common.entity.Result;
+import com.microservice.valpro.common.dto.Result;
 import com.microservice.valpro.oauth.dao.RoleDao;
 import com.microservice.valpro.oauth.entity.SysRole;
 import com.microservice.valpro.oauth.service.RoleService;

@@ -6,7 +6,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
   client:
@@ -16,10 +16,18 @@ eureka:
 #  health:
 #    sensitive: false
 #    enabled: true
-#management:
-#  security:
-#    enabled: false
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+#turbine:
+#  app-config-list: micro-a-service
+#  cluster-name-expression: "'default'"
 turbine:
-  app-config-list: micro-a-service
-  cluster-name-expression: "'default'"
+  app-config: micro-a-service
+  combine-host-port: true
+  cluster-name-expression: new String("default")

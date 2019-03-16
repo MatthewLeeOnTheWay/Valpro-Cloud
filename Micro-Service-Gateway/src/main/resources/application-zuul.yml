@@ -1,0 +1,10 @@
+zuul:
+  routes:
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders: "*"
+      serviceId: authcenter
+    res:
+      path: /res/**
+      sensitiveHeader: "*"
+      serviceId: ljx-message

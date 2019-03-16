@@ -1,7 +1,13 @@
-#zuulÕ¯πÿ
 spring:
   application:
     name: ljx-gateway
+  profiles:
+    include: zuul
+#  redis:
+#    ################### redis ÂçïÊú∫Áâà start ##########################
+#    host: 192.168.24.188
+#    port: 6379
+#    database: 1
 server:
   port: 9030
 eureka:
@@ -12,31 +18,29 @@ eureka:
     lease-expiration-duration-in-seconds: 10
   client:
     service-url:
-      defaultZone: http://ljx-eureka1:9010/eureka/,http://ljx-eureka2:9011/eureka/
-    eureka-server-read-timeout-seconds:
+      defaultZone: http://mss-eureka1:9010/eureka/,http://mss-eureka2:9011/eureka/
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul: TRACE
 zuul:
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
     connection-request-timeout-millis: 6000
-  routes:
-    uaa:
-#±Ì√˜º¯»®»œ÷§æ≠π˝zuul
-      path: /uaa/**
-      strip-prefix: true
-      sensitiveHeaders:
-      serviceId: authcenter
-security:
-  oauth2:
-    client:
-      access-token-uri: http://localhost:9030/uaa/oauth/token ##Õ¯πÿµƒµÿ÷∑
-      user-authorization-uri: http://localhost:9030/uaa/oauth/authorize
-    resource:
-      user-info-uri:  http://localhost:9030/uaa/user
-      prefer-token-info: false
-##############end#####################
-####≥¨ ±≈‰÷√####
+  strip-prefix: false
+  retryable: false
+  ignored-services: "*"
+#
+#security:
+#  oauth2:
+#    client:
+#      access-token-uri: http://localhost:${server.port}/uaa/oauth/token
+#      user-authorization-uri: http://localhost:${server.port}/uaa/oauth/authorize
+#      authentication-scheme: form
+#    resource:
+#      user-info-uri:  http://localhost:${server.port}/uaa/user
+#      prefer-token-info: false
+
 ribbon:
   eureka:
     enabled: true
-###≥¨ ±≈‰÷√###

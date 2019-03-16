@@ -1,11 +1,13 @@
+spring:
+  application:
+    name: ljx-eureka
+
 server:
   port: 9010
 eureka:
-  instance:
-    hostname: ljx-eureka1
   client:
     ##这里要覆盖application的设置，不然会读取application文件导致unavailable-replicas
-    register-with-eureka: true
-    fetch-registry: true
     service-url:
-      defaultZone: http://ljx-eureka2:9011/eureka/
+      defaultZone: http://mss-eureka2:9011/eureka/
+  instance:
+    hostname: mss-eureka1

@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.common.DefaultThrowableAnalyzer;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.InsufficientScopeException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.web.util.ThrowableAnalyzer;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
  * @author: Mr.Lee
  * @create: 2019-01-02 02:02
  **/
-public class MsvWebResponseExceptionTranslator implements org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator<OAuth2Exception> {
+public class MsvWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
     private ThrowableAnalyzer throwableAnalyzer = new DefaultThrowableAnalyzer();
 
     @Override
@@ -36,22 +37,22 @@ public class MsvWebResponseExceptionTranslator implements org.springframework.se
         ase = (AuthenticationException) throwableAnalyzer.getFirstThrowableOfType(AuthenticationException.class,
                 causeChain);
         if (ase != null) {
-            return handleOAuth2Exception(new MsvWebResponseExceptionTranslator.UnauthorizedException(e.getMessage(), e));
+            return handleOAuth2Exception(new UnauthorizedException(e.getMessage(), e));
         }
 
         ase = (AccessDeniedException) throwableAnalyzer
                 .getFirstThrowableOfType(AccessDeniedException.class, causeChain);
         if (ase instanceof AccessDeniedException) {
-            return handleOAuth2Exception(new MsvWebResponseExceptionTranslator.ForbiddenException(ase.getMessage(), ase));
+            return handleOAuth2Exception(new ForbiddenException(ase.getMessage(), ase));
         }
 
         ase = (HttpRequestMethodNotSupportedException) throwableAnalyzer.getFirstThrowableOfType(
                 HttpRequestMethodNotSupportedException.class, causeChain);
         if (ase instanceof HttpRequestMethodNotSupportedException) {
-            return handleOAuth2Exception(new MsvWebResponseExceptionTranslator.MethodNotAllowed(ase.getMessage(), ase));
+            return handleOAuth2Exception(new MethodNotAllowed(ase.getMessage(), ase));
         }
 
-        return handleOAuth2Exception(new MsvWebResponseExceptionTranslator.ServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e));
+        return handleOAuth2Exception(new ServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e));
 
     }
 

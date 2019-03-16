@@ -1,6 +1,5 @@
 package com.microservice.valpro.oauth.dao;
 
-import com.microservice.valpro.common.entity.UserVo;
 import com.microservice.valpro.oauth.entity.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

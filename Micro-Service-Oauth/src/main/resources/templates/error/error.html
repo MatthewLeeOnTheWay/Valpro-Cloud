@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <title>错误页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <h1 style="text-align: left">错误信息：</h1>
+        <div th:text="${errorMessage}" style="text-align: left;color: red"></div><br/>
+
+        <h1 style="text-align: left">堆栈信息：</h1>
+        <div th:each="trace:${stackTrace}" style="text-align: left ;color: red">
+            <div th:text="${trace}" style="text-align: left"></div>
+        </div>
+
+        <div id="app">
+            <ul>
+                <li v-for="value in object">
+                    {{ value }}
+                </li>
+            </ul>
+
+            <button v-on:click="counter += 1">增加 1</button>
+            <p>这个按钮被点击了 {{ counter }} 次。</p>
+            <input type="text" name="name" v-model="selectById.name" > //v-model实现数据的双向绑定
+        </div>
+
+
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    selectById : "",
+                    object: {
+                        name: '菜鸟教程',
+                        url: 'http://www.runoob.com',
+                        slogan: '学的不仅是技术，更是梦想！'
+                    },
+                    counter: 0
+                }
+            })
+        </script>
+    </div>
+
+
+</body>
+</html>
