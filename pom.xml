@@ -31,6 +31,7 @@
         <spring-security-oauth.version>2.3.3.RELEASE</spring-security-oauth.version>
         <thymeleaf-extras-springsecurity.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity.version>
         <thymeleaf-layout-version>2.3.0</thymeleaf-layout-version>
+        <security-jwt.version>1.0.9.RELEASE</security-jwt.version>
     </properties>
     <dependencies>
         <dependency>
@@ -48,9 +49,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>0.9.0</version>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>1.0.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

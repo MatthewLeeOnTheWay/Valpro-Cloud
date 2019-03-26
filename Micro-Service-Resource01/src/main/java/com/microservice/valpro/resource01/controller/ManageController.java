@@ -25,7 +25,7 @@ public class ManageController {
     @Resource
     private RestTemplate template;
 
-    @RequestMapping("/user/login")
+    @RequestMapping("/test")
     public Mono<String> getLoginValidate() {
         return Mono.just("hdkajs");
     }
@@ -89,12 +89,5 @@ public class ManageController {
         }
 
         return Mono.just(result);
-    }
-
-    @RequestMapping("testHttp")
-    public String getObject() {
-        String result;
-        result = template.getForObject("http://192.168.24.1:9060/test", String.class);
-        return result;
     }
 }

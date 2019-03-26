@@ -1,13 +1,10 @@
+authcenter: 192.168.24.1:9030/uaa
+debug: true
 spring:
   application:
-    name: ljx-gateway
-  profiles:
-    include: zuul
-#  redis:
-#    ################### redis 单机版 start ##########################
-#    host: 192.168.24.188
-#    port: 6379
-#    database: 1
+    name: zuul
+  aop:
+    proxy-target-class: true
 server:
   port: 9030
 eureka:
@@ -23,23 +20,33 @@ logging:
   level:
     org.springframework.cloud.netflix.zuul: TRACE
 zuul:
-  host:
-    connect-timeout-millis: 10000
-    socket-timeout-millis: 60000
-    connection-request-timeout-millis: 6000
-  strip-prefix: false
-  retryable: false
-  ignored-services: "*"
-#
-#security:
-#  oauth2:
-#    client:
-#      access-token-uri: http://localhost:${server.port}/uaa/oauth/token
-#      user-authorization-uri: http://localhost:${server.port}/uaa/oauth/authorize
-#      authentication-scheme: form
-#    resource:
-#      user-info-uri:  http://localhost:${server.port}/uaa/user
-#      prefer-token-info: false
+  add-host-header: true
+  routes:
+    oauth2:
+      service-id: oauth2
+      path: /uaa/**
+      strip-prefix: false
+      #处理http请求头为空的问题
+      sensitive-headers:
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://oauth2/uaa/oauth/token #令牌端点
+      user-authorization-uri: /uaa/oauth/authorize #授权端点
+      client-id: client #OAuth2客户端ID
+      client-secret: secret #OAuth2客户端密钥
+    resource:
+#      user-info-uri: http://authcenter/uaa/user
+      jwt:
+        keyValue: \
+          -----BEGIN PUBLIC KEY-----\
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoZQfHaHQEzGuWBESlrcoM9DMiVM/fHEjLG7VK3COZ1xuM49P4pC+pNY3nm+wL/WM8QQdYNjPetzCiltLdW60rQa/+osW599SkmUSGF7rYXI9y4n1N4h0k9jLBdZ9n2/5miWWPDwrbsIGgLXp/NIsH4T2Gj6lUZuMj4cskIjU8P12S5TJEQ3N+PGYBY+G8zWzYB1dr3LssqATOqv1/XH+kPEesAtaaxJsfa/SWpaxDZnM5JGSjQ1/FEjyF2e0yAKbV/NqHnIqqnucr/StFBn/sGloEs1DAj8nIMtoiklqejqJvjCSdOC75f2N3iK72DgAVZkSNtfEdsVygHiOOtBtWQIDAQAB\
+          -----END PUBLIC KEY-----
+      id: ${spring.application.name}
+      service-id: ${PREFIX:}zuul
+#      token-info-uri: http://authcenter/uaa/user
+#      user-info-uri: /uaa/user
 
 ribbon:
   eureka:

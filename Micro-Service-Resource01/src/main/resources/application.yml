@@ -41,9 +41,7 @@ server:
 security:
   oauth2:
     resource:
-      id: ljx-message
       user-info-uri: http://localhost:9030/uaa/user
-      prefer-token-info: false
 eureka:
   instance:
     prefer-ip-address: true

@@ -1,3 +1,4 @@
+/*
 package com.microservice.vapro.gateway.filter;
 
 import com.netflix.zuul.ZuulFilter;
@@ -10,11 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * @description:jwt token预置校验
- * @author: Mr.Lee
- * @create: 2019-03-14 17:36
- **/
+
 @Component
 public class MyFilter extends ZuulFilter {
     private static Logger log= LoggerFactory.getLogger(MyFilter.class);
@@ -56,3 +53,4 @@ public class MyFilter extends ZuulFilter {
         return null;
     }
 }
+*/

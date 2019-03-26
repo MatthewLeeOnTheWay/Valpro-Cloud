@@ -1,4 +1,4 @@
-package com.microservice.valpro.oauth.security;
+package com.microservice.valpro.oauth.entity;
 
 import java.util.Collection;
 

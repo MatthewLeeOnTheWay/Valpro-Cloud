@@ -1,8 +1,16 @@
+
 server:
   port: 9060
+  servlet:
+    context-path: /uaa
+
 spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
   application:
-    name: authcenter
+    name: oauth2
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
@@ -16,14 +24,13 @@ spring:
     host: 192.168.24.188
     port: 6379
     password: test123
-
-  thymeleaf:
-    cache: false
-    encoding: utf-8
-    check-template: true
-    enabled: true
-    check-template-location: true
-    mode: html
+#  thymeleaf:
+#    cache: false
+#    encoding: utf-8
+#    check-template: true
+#    enabled: true
+#    check-template-location: true
+#    mode: html
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -44,16 +51,20 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
     type: com.zaxxer.hikari.HikariDataSource
-
   jackson:
     serialization:
       indent_output: true
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/**,/webjars/**,classpath:/static/js/,classpath:/templates/
   mvc:
-    view:
-      suffix: .html
+#    view:
+#      suffix: .ftl
     throw-exception-if-no-handler-found: true
+  freemarker:
+    charset: utf-8
+    suffix: .ftl
+    content-type: text/html;charset=UTF-8
+    expose-session-attributes: true
 
 eureka:
   instance:
@@ -79,3 +90,7 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
+security:
+  oauth2:
+    client:
+      registered-redirect-uri: http://ljx-gateway:9030/uaa/login

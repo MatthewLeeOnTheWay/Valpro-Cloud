@@ -16,6 +16,7 @@ import java.io.InputStream;
  * @author: Mr.Lee
  * @create: 2019-03-14 17:39
  **/
+
 @Component
 public class ValproFallbackProvider implements FallbackProvider {
     @Override

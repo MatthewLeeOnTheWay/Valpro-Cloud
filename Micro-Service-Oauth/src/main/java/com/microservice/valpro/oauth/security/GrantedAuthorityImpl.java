@@ -1,11 +1,14 @@
+/*
 package com.microservice.valpro.oauth.security;
 import org.springframework.security.core.GrantedAuthority;
 
+*/
 /**
  * 权限封装
  * @author Louis
  * @date Nov 20, 2018
- */
+ *//*
+
 public class GrantedAuthorityImpl implements GrantedAuthority {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,4 +27,4 @@ public class GrantedAuthorityImpl implements GrantedAuthority {
     public String getAuthority() {
         return this.authority;
     }
-}
+}*/

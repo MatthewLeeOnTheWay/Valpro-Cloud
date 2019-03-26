@@ -1,3 +1,4 @@
+/*
 package com.microservice.vapro.gateway.swagger;
 
 import org.springframework.context.annotation.Bean;
@@ -9,10 +10,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+*/
 /**
  * @Author: Mr.Lee
  * @Date: 2019/1/2
-*/
+*//*
+
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
@@ -32,3 +35,4 @@ public class Swagger2Config {
                 .build();
     }
 }
+*/

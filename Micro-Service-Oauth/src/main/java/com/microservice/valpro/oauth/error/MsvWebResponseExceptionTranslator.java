@@ -1,3 +1,4 @@
+/*
 package com.microservice.valpro.oauth.error;
 
 import org.springframework.http.HttpHeaders;
@@ -15,11 +16,13 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import java.io.IOException;
 
+*/
 /**
  * @description:
  * @author: Mr.Lee
  * @create: 2019-01-02 02:02
- **/
+ **//*
+
 public class MsvWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
     private ThrowableAnalyzer throwableAnalyzer = new DefaultThrowableAnalyzer();
 
@@ -154,3 +157,4 @@ public class MsvWebResponseExceptionTranslator implements WebResponseExceptionTr
 
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.microservice.valpro.oauth.utils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,51 +9,64 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.microservice.valpro.oauth.security.GrantedAuthorityImpl;
-import com.microservice.valpro.oauth.security.JwtAuthenticatioToken;
+import com.microservice.valpro.oauth.entity.JwtAuthenticatioToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+*/
 /**
  * JWT工具类
  * @author Louis
  * @date Nov 20, 2018
- */
+ *//*
+
 public class JwtTokenUtils implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	/**
+	*/
+/**
 	 * 用户名称
-	 */
+	 *//*
+
 	private static final String USERNAME = Claims.SUBJECT;
-	/**
+	*/
+/**
 	 * 创建时间
-	 */
+	 *//*
+
 	private static final String CREATED = "created";
-	/**
+	*/
+/**
 	 * 权限列表
-	 */
+	 *//*
+
 	private static final String AUTHORITIES = "authorities";
-	/**
+	*/
+/**
      * 密钥
-     */
+     *//*
+
     private static final String SECRET = "abcdefgh";
-    /**
+    */
+/**
      * 有效期12小时
-     */
+     *//*
+
     private static final long EXPIRE_TIME = 12 * 60 * 60 * 1000;
 
-    /**
+    */
+/**
 	 * 生成令牌
 	 *
 	 * @param authentication 用户
 	 * @return 令牌
-	 */
+	 *//*
+
 	public static String generateToken(Authentication authentication) {
 	    Map<String, Object> claims = new HashMap<>(3);
 	    claims.put(USERNAME, SecurityUtils.getUsername(authentication));
@@ -61,23 +75,27 @@ public class JwtTokenUtils implements Serializable {
 	    return generateToken(claims);
 	}
 
-	/**
+	*/
+/**
      * 从数据声明生成令牌
      *
      * @param claims 数据声明
      * @return 令牌
-     */
+     *//*
+
     private static String generateToken(Map<String, Object> claims) {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET).compact();
     }
 
-    /**
+    */
+/**
 	 * 从令牌中获取用户名
 	 *
 	 * @param token 令牌
 	 * @return 用户名
-	 */
+	 *//*
+
 	public static String getUsernameFromToken(String token) {
 	    String username;
 	    try {
@@ -89,11 +107,13 @@ public class JwtTokenUtils implements Serializable {
 	    return username;
 	}
 	
-	/**
+	*/
+/**
 	 * 根据请求令牌获取登录认证信息
 	 * @param request 令牌
 	 * @return 用户名
-	 */
+	 *//*
+
 	public static Authentication getAuthenticationeFromToken(HttpServletRequest request) {
 		Authentication authentication = null;
 		// 获取请求携带的令牌
@@ -117,7 +137,7 @@ public class JwtTokenUtils implements Serializable {
 				List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 				if (authors != null && authors instanceof List) {
 					for (Object object : (List) authors) {
-						authorities.add(new GrantedAuthorityImpl((String) ((Map) object).get("authority")));
+						authorities.add(new SimpleGrantedAuthority((String) ((Map) object).get("authority")));
 					}
 				}
 				authentication = new JwtAuthenticatioToken(username, null, authorities, token);
@@ -131,12 +151,14 @@ public class JwtTokenUtils implements Serializable {
 		return authentication;
 	}
 
-	/**
+	*/
+/**
      * 从令牌中获取数据声明
      *
      * @param token 令牌
      * @return 数据声明
-     */
+     *//*
+
     private static Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
@@ -147,22 +169,26 @@ public class JwtTokenUtils implements Serializable {
         return claims;
     }
 
-    /**
+    */
+/**
 	 * 验证令牌
 	 * @param token
 	 * @param username
 	 * @return
-	 */
+	 *//*
+
 	public static Boolean validateToken(String token, String username) {
 	    String userName = getUsernameFromToken(token);
 	    return (userName.equals(username) && !isTokenExpired(token));
 	}
 
-	/**
+	*/
+/**
 	 * 刷新令牌
 	 * @param token
 	 * @return
-	 */
+	 *//*
+
 	public static String refreshToken(String token) {
 	    String refreshedToken;
 	    try {
@@ -175,12 +201,14 @@ public class JwtTokenUtils implements Serializable {
 	    return refreshedToken;
 	}
 
-	/**
+	*/
+/**
      * 判断令牌是否过期
      *
      * @param token 令牌
      * @return 是否过期
-     */
+     *//*
+
     public static Boolean isTokenExpired(String token) {
         try {
             Claims claims = getClaimsFromToken(token);
@@ -191,11 +219,13 @@ public class JwtTokenUtils implements Serializable {
         }
     }
 
-    /**
+    */
+/**
      * 获取请求token
      * @param request
      * @return
-     */
+     *//*
+
     public static String getToken(HttpServletRequest request) {
     	String token = request.getHeader("Authorization");
         String tokenHead = "Bearer ";
@@ -210,4 +240,4 @@ public class JwtTokenUtils implements Serializable {
         return token;
     }
 
-}
+}*/

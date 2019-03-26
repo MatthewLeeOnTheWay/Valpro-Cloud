@@ -1,16 +1,19 @@
+/*
 package com.microservice.valpro.oauth.security;
 import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.userdetails.UserDetails;
 
+*/
 /**
  * 安全用户模型
  * @author Louis
  * @date Nov 20, 2018
- */
+ *//*
+
+
 public class JwtUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -71,4 +74,4 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-}
+}*/

@@ -44,9 +44,4 @@ public class UserController {
         log.info(username+password);
         return Mono.just("/index/home");
     }
-
-    @RequestMapping("/test")
-    public Mono<String> test(){
-        return Mono.just("/component/starter");
-    }
 }

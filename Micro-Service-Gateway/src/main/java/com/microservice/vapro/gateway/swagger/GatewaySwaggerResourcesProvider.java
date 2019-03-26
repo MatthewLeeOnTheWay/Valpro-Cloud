@@ -1,3 +1,4 @@
+/*
 package com.microservice.vapro.gateway.swagger;
 
 import org.springframework.cloud.netflix.zuul.filters.Route;
@@ -10,13 +11,15 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * Description:整个系统的文档整合在同一个页面上
  * User: Mr.Lee
  * Date: 2018-04-18
  * Time: 14:56
- */
+ *//*
+
 @Component
 @Primary
 public class GatewaySwaggerResourcesProvider implements SwaggerResourcesProvider {
@@ -43,3 +46,4 @@ public class GatewaySwaggerResourcesProvider implements SwaggerResourcesProvider
         return swaggerResource;
     }
 }
+*/
