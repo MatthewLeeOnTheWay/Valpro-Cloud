@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: ljx-message
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/**,/webjars/**,classpath:/static/js/,classpath:/templates/
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9060/uaa/token_keys
+  jackson:
+    serialization:
+      indent_output: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+  datasource:
+    url: jdbc:mariadb://192.168.24.1:3306/valpro_cloud?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 1234
+
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.mariadb.jdbc.Driver
+server:
+  port: 8090
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://mss-eureka1:9010/eureka/,http://mss-eureka2:9011/eureka/
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO

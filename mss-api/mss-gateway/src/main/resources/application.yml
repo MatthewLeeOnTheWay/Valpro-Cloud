@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: zuul
+  profiles:
+    include: unit
+  redis:
+    port: 6379
+    database: 1
+    host: localhost
+    password:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+#          default false and need to overwrite,so many cheater in www with no opinion
+#          dispatch rule with service-id
+          enabled: true
+
+server:
+  port: 9030
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://mss-eureka1:9010/eureka/,http://mss-eureka2:9011/eureka/
+ribbon:
+  eureka:
+    enabled: true
