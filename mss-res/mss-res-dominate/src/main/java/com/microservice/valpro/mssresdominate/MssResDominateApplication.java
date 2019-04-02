@@ -1,15 +1,13 @@
-package com.microservice.valpro.msszuul;
+package com.microservice.valpro.mssresdominate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-/*
-* @description: zuul与gateway二选一
-* */
+
 @SpringBootApplication
-public class MssZuulApplication {
+public class MssResDominateApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MssZuulApplication.class, args);
+        SpringApplication.run(MssResDominateApplication.class, args);
     }
 
 }

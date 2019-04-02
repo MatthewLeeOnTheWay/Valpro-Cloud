@@ -20,6 +20,7 @@ import reactor.core.publisher.Mono;
 
 /*
 * @description: 安全、监控\指标、限流
+* zuul和gateway二选一
 * */
 //@EnableOAuth2Sso
 @EnableDiscoveryClient

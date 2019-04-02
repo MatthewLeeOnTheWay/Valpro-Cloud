@@ -16,7 +16,8 @@ spring:
 #          default false and need to overwrite,so many cheater in www with no opinion
 #          dispatch rule with service-id
           enabled: true
-
+  aop:
+    proxy-target-class: true
 server:
   port: 9030
 eureka:
