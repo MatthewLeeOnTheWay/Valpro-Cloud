@@ -15,6 +15,7 @@
     <modules>
         <module>mss-gateway</module>
         <module>mss-zuul</module>
+        <module>mss-api-test</module>
     </modules>
 
 </project>

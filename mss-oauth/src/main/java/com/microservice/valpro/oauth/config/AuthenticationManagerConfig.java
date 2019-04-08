@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -22,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 
+import javax.sql.DataSource;
 import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,60 +36,48 @@ import java.util.Map;
 @Configuration
 @EnableAuthorizationServer
 public class AuthenticationManagerConfig extends AuthorizationServerConfigurerAdapter {
-
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Bean
-    public JwtTokenStore jwtTokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
-    }
-
-    public AuthenticationManagerConfig(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
-    /*用于自定义TokenService*/
-    @Primary
-    @Bean
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(jwtTokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        //设置jwtAccessTokenConverter,因为jwtAccessTokenConverter实现了TokenEnhancer接口
-        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-//        defaultTokenServices.setClientDetailsService(clientDetailsService());
-        return defaultTokenServices;
-    }
+    private DataSource dataSource;
 
     @Override
-    public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")/*.allowFormAuthenticationForClients()*/;
-
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.allowFormAuthenticationForClients();
+        security.tokenKeyAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory() // 使用in-memory存储
-                .withClient("client") // client_id
-                //secret:secret
-                .secret("$2a$10$HEAIdxtzHvCBkIfRDF1XDe2uEdjmxkf5gHfcZFuRUCZEKeW0n6RlG") // client_secret
-                .autoApprove(true)
-                .authorizedGrantTypes("authorization_code","refresh_token") // 该client允许的授权类型
-                .redirectUris("http://localhost:9030/login/oauth2/code/client")//set redirect as gateway set
-                .scopes("all"); // 允许的授权范围
+        clients.jdbc(dataSource);
     }
 
     @Override
-    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        // @formatter:off
-        endpoints.tokenStore(jwtTokenStore()).userDetailsService(userDetailsService).authenticationManager(authenticationManager);
-        endpoints.tokenServices(tokenServices());
-
-        // @formatter:on
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.accessTokenConverter(jwtAccessTokenConverter());
+        endpoints.tokenStore(jwtTokenStore());
+//        endpoints.tokenServices(defaultTokenServices());
     }
+
+    /*@Primary
     @Bean
+    public DefaultTokenServices defaultTokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(jwtTokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        return defaultTokenServices;
+    }*/
+
+    @Bean
+    public JwtTokenStore jwtTokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey("cjs");   //  Sets the JWT signing key
+        return jwtAccessTokenConverter;
+    }
+    /*@Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter() {
             @Override
@@ -104,5 +94,5 @@ public class AuthenticationManagerConfig extends AuthorizationServerConfigurerAd
                 .getKeyPair("kevin_key");
         converter.setKeyPair(keyPair);
         return converter;
-    }
+    }*/
 }

@@ -117,13 +117,10 @@
         </dependencies>
     </dependencyManagement>
     <modules>
-        <module>mss-eureka</module>
+        <module>mss-backup</module>
         <module>mss-common</module>
-        <module>mss-config</module>
         <module>mss-api</module>
-        <module>mss-monitor</module>
         <module>mss-oauth</module>
-        <module>mss-api</module>
         <module>mss-res</module>
     </modules>
     <repositories>

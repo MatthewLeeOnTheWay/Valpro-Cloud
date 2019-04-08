@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
     }
-    //encoder for userPassword and clientPassword
+    //encoder not only for userPassword but also for clientPassword
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -95,5 +95,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService())
                 .passwordEncoder(new BCryptPasswordEncoder());
+        auth.parentAuthenticationManager(authenticationManagerBean());
     }
 }

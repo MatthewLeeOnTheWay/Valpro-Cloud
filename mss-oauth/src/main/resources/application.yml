@@ -2,6 +2,9 @@ server:
   port: 9060
   servlet:
     context-path: /uaa
+#provider for OAuth2AuthorizationCodeAuthenticationToken
+issuer:
+  uri: http://localhost:9060/uaa
 
 spring:
   cloud:

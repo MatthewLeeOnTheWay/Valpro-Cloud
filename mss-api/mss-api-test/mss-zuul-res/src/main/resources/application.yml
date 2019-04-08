@@ -1,0 +1,19 @@
+server:
+  port: 1010
+spring:
+  application:
+    name: user-service
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://mss-eureka1:9010/eureka/,http://mss-eureka2:9011/eureka/
+ribbon:
+  eureka:
+    enabled: true
